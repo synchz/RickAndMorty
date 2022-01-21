@@ -12,5 +12,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":domain")
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
+//    implementation "androidx.paging:paging-runtime:$pagingVersion"
 }

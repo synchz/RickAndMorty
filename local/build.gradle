@@ -40,7 +40,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
+//    implementation "androidx.paging:paging-runtime:$pagingVersion"
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
     androidTestImplementation "androidx.test.ext:junit:$testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
