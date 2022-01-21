@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="Rick__&amp;_Morty.app" target="11" />
+      <module name="Rick__&amp;_Morty.local" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

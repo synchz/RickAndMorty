@@ -8,3 +8,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Rick  & Morty"
 include ':app'
+include ':domain'
+include ':data'
+include ':local'
+include ':remote'
