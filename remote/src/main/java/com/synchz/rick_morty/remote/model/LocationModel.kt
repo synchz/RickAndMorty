@@ -1,7 +1,7 @@
 package com.synchz.rick_morty.remote.model
 
 data class LocationModel(
-    val id: Int,
+    val id: Long,
     val name: String,
     val type: String,
     val dimension: String,
