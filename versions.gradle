@@ -36,7 +36,7 @@ ext {
     // Architecture components
     roomVersion = "2.4.1"
     archCoreVersion = "2.1.0"
-    pagingVersion = "3.1.0"
+    pagingVersion = "2.1.1"
 
 
 }

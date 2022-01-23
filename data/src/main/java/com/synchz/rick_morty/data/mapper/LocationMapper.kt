@@ -2,8 +2,9 @@ package com.synchz.rick_morty.data.mapper
 
 import com.synchz.rick_morty.data.model.LocationEntity
 import com.synchz.rick_morty.domain.entities.Location
+import javax.inject.Inject
 
-class LocationMapper : Mapper<LocationEntity, Location> {
+class LocationMapper @Inject constructor() : Mapper<LocationEntity, Location> {
     override fun from(location: Location) = LocationEntity(
         id = location.id,
         name = location.name,

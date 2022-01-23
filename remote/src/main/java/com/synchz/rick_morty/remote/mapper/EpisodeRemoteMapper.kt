@@ -1,11 +1,11 @@
-package com.synchz.rick_morty.data.mapper
+package com.synchz.rick_morty.remote.mapper
 
 import com.synchz.rick_morty.data.model.EpisodeEntity
-import com.synchz.rick_morty.domain.entities.Episode
+import com.synchz.rick_morty.remote.model.EpisodeModel
 import javax.inject.Inject
 
-class EpisodeMapper @Inject constructor() : Mapper<EpisodeEntity, Episode> {
-    override fun from(episode: Episode) = EpisodeEntity(
+class EpisodeRemoteMapper @Inject constructor() : Mapper<EpisodeModel, EpisodeEntity> {
+    override fun from(episode: EpisodeEntity) = EpisodeModel(
         id = episode.id,
         name = episode.name,
         air_date = episode.air_date,
@@ -15,7 +15,7 @@ class EpisodeMapper @Inject constructor() : Mapper<EpisodeEntity, Episode> {
         created = episode.created
     )
 
-    override fun to(episodeEntity: EpisodeEntity) = Episode(
+    override fun to(episodeEntity: EpisodeModel) = EpisodeEntity(
         id = episodeEntity.id,
         name = episodeEntity.name,
         air_date = episodeEntity.air_date,

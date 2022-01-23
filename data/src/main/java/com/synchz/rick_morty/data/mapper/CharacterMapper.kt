@@ -4,8 +4,9 @@ import com.synchz.rick_morty.data.model.CharacterEntity
 import com.synchz.rick_morty.data.model.CharacterLocationEntity
 import com.synchz.rick_morty.domain.entities.Character
 import com.synchz.rick_morty.domain.entities.CharacterLocation
+import javax.inject.Inject
 
-class CharacterMapper : Mapper<CharacterEntity, Character> {
+class CharacterMapper @Inject constructor() : Mapper<CharacterEntity, Character> {
     override fun from(character: Character) = CharacterEntity(
         id = character.id,
         name = character.name,

@@ -1,6 +1,6 @@
-package com.synchz.rick_morty.remote.model
+package com.synchz.rick_morty.data.model
 
-data class InfoModel(
+data class InfoEntity(
     var count: Int,
     var pages: Int,
     var next: String?,
