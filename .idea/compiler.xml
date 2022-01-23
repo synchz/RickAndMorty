@@ -6,6 +6,7 @@
       <module name="Rick__&amp;_Morty.data" target="1.8" />
       <module name="Rick__&amp;_Morty.domain" target="1.8" />
       <module name="Rick__&amp;_Morty.local" target="11" />
+      <module name="Rick__&amp;_Morty.paging" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

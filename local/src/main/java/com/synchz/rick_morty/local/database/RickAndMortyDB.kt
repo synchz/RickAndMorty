@@ -8,20 +8,19 @@ import androidx.room.RoomDatabase
 import com.synchz.rick_morty.local.database.dao.CharacterDao
 import com.synchz.rick_morty.local.database.dao.EpisodeDao
 import com.synchz.rick_morty.local.database.dao.LocationDao
-import com.synchz.rick_morty.local.model.CharacterLocal
-import com.synchz.rick_morty.local.model.EpisodeLocal
-import com.synchz.rick_morty.local.model.LocationLocal
+import com.synchz.rick_morty.local.model.*
 
 @Database(
-    entities = [CharacterLocal::class, EpisodeLocal::class, LocationLocal::class],
+    entities = [CharacterLocal::class, EpisodeLocal::class, LocationLocal::class, EpisodeRemoteKeysLocal::class, CharacterRemoteKeysLocal::class, LocationRemoteKeysLocal::class],
     version = 1,
     exportSchema = false
 )
-abstract class RickAndMortyDB: RoomDatabase() {
+abstract class RickAndMortyDB : RoomDatabase() {
 
     companion object {
         private val LOCK = Any()
         private const val DATABASE_NAME = "rick_and_morty.db"
+
         @Volatile
         private var INSTANCE: RickAndMortyDB? = null
 

@@ -10,6 +10,5 @@ java {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "javax.inject:javax.inject:$javaxInjectVersion"
-    implementation "androidx.paging:paging-common:$pagingVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
 }

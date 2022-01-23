@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.synchz.rick_morty.domain.entities.Character
 import com.synchz.rick_morty.domain.usecases.FetchCharacterListUseCase
-import com.synchz.rick_morty.domain.usecases.GetCharacterListUseCase
+import com.synchz.rick_morty.domain.usecases.GetCharacterListDataSourceUseCase
 import com.synchz.rick_morty.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterListViewModel @Inject constructor(
-    private val characterListUseCase: GetCharacterListUseCase,
+    private val characterListUseCase: GetCharacterListDataSourceUseCase,
     private val fetchCharacterListUseCase: FetchCharacterListUseCase
 ) : BaseViewModel() {
 

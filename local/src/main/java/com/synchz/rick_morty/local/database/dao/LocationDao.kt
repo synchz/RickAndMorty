@@ -1,6 +1,6 @@
 package com.synchz.rick_morty.local.database.dao
 
-import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,11 +11,11 @@ import com.synchz.rick_morty.local.model.LocationLocal
 interface LocationDao {
 
     @Query("SELECT * FROM location_local")
-    fun getLocations(): DataSource.Factory<Int, LocationLocal>
+    fun getLocations(): PagingSource<Int, LocationLocal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveLocation(character: LocationLocal)
 
     @Query("DELETE FROM location_local")
-    fun clearLocations()
+    fun clearLocations(): Int
 }

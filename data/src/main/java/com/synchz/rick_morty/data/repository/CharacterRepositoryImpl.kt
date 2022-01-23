@@ -1,16 +1,20 @@
 package com.synchz.rick_morty.data.repository
 
-import androidx.paging.DataSource
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.synchz.rick_morty.data.dataSource.LocalDataSource
+import com.synchz.rick_morty.data.dataSource.PagingDataSource
 import com.synchz.rick_morty.data.dataSource.RemoteDatasource
 import com.synchz.rick_morty.data.mapper.CharacterMapper
 import com.synchz.rick_morty.domain.entities.Character
 import com.synchz.rick_morty.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CharacterRepositoryImpl @Inject constructor(
+    private val pagingDataSource: PagingDataSource,
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDatasource,
     private val characterMapper: CharacterMapper
@@ -25,8 +29,12 @@ class CharacterRepositoryImpl @Inject constructor(
         emit(characterList)
     }
 
-    override suspend fun getCharactersDataSource(): DataSource.Factory<Int, Character> {
-        return localDataSource.getCharacters().map { characterMapper.to(it) }
+    override suspend fun getCharactersDataSource(): Flow<PagingData<Character>> {
+        return pagingDataSource.getCharacters().map { pagingData->
+            pagingData.map{
+                characterMapper.to(it)
+            }
+        }
     }
 
     override suspend fun getCharacterById(characterId: Long): Flow<Character> {

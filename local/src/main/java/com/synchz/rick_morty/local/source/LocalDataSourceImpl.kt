@@ -1,29 +1,28 @@
 package com.synchz.rick_morty.local.source
 
-import androidx.paging.DataSource
 import com.synchz.rick_morty.data.dataSource.LocalDataSource
 import com.synchz.rick_morty.data.model.CharacterEntity
+import com.synchz.rick_morty.data.model.CharacterRemoteKeysEntity
 import com.synchz.rick_morty.data.model.EpisodeEntity
 import com.synchz.rick_morty.data.model.LocationEntity
 import com.synchz.rick_morty.local.database.dao.CharacterDao
 import com.synchz.rick_morty.local.database.dao.EpisodeDao
 import com.synchz.rick_morty.local.database.dao.LocationDao
 import com.synchz.rick_morty.local.mapper.CharacterLocalMapper
+import com.synchz.rick_morty.local.mapper.CharacterRemoteKeyLocalMapper
 import com.synchz.rick_morty.local.mapper.EpisodeLocalMapper
 import com.synchz.rick_morty.local.mapper.LocationLocalMapper
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
     private val characterLocalMapper: CharacterLocalMapper,
+    private val characterRemoteKeyLocalMapper: CharacterRemoteKeyLocalMapper,
     private val episodeLocalMapper: EpisodeLocalMapper,
     private val locationLocalMapper: LocationLocalMapper,
     private val characterDao: CharacterDao,
     private val episodeDao: EpisodeDao,
     private val locationDao: LocationDao
 ): LocalDataSource{
-    override suspend fun getCharacters(): DataSource.Factory<Int, CharacterEntity> {
-        return characterDao.getCharacters().map { characterLocalMapper.to(it) }
-    }
 
     override suspend fun saveCharacters(listCharacters: List<CharacterEntity>) {
         listCharacters.forEach {
@@ -43,8 +42,19 @@ class LocalDataSourceImpl @Inject constructor(
         characterDao.clearCharacter()
     }
 
-    override suspend fun getLocations(): DataSource.Factory<Int, LocationEntity> =
-        locationDao.getLocations().map { locationLocalMapper.to(it) }
+    override suspend fun getCharacterRemoteKeyById(id: Long): CharacterRemoteKeysEntity? {
+        return characterDao.getCharacterRemoteKeyById(id)?.let{
+            characterRemoteKeyLocalMapper.to(it)
+        }
+    }
+
+    override suspend fun saveCharacterRemoteKey(key: CharacterRemoteKeysEntity) {
+        characterDao.saveCharacterRemoteKey(characterRemoteKeyLocalMapper.from(key))
+    }
+
+    override suspend fun clearCharacterRemoteKey() {
+        characterDao.clearCharacterRemoteKey()
+    }
 
     override suspend fun saveLocations(listLocations: List<LocationEntity>) {
         listLocations.forEach {
@@ -63,9 +73,6 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun clearLocations() {
         locationDao.clearLocations()
     }
-
-    override suspend fun getEpisodes(): DataSource.Factory<Int, EpisodeEntity> =
-        episodeDao.getEpisodes().map { episodeLocalMapper.to(it) }
 
     override suspend fun saveEpisodes(listEpisodes: List<EpisodeEntity>) {
         listEpisodes.forEach {
