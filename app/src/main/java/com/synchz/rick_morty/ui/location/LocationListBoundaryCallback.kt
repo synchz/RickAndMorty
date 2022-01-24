@@ -1,21 +1,21 @@
-package com.synchz.rick_morty.ui.character
+package com.synchz.rick_morty.ui.location
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.synchz.rick_morty.BuildConfig
-import com.synchz.rick_morty.domain.entities.Character
-import com.synchz.rick_morty.domain.usecases.FetchCharacterListUseCase
+import com.synchz.rick_morty.domain.entities.Location
+import com.synchz.rick_morty.domain.usecases.FetchLocationsListUseCase
 import com.synchz.rick_morty.ui.common.Status
 import com.synchz.rick_morty.utils.NetworkUtil
 import kotlinx.coroutines.*
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class CharacterListBoundaryCallback @Inject constructor(
-    private val fetchCharacterListUseCase: FetchCharacterListUseCase,
+class LocationListBoundaryCallback @Inject constructor(
+    private val fetchLocationListUseCase: FetchLocationsListUseCase,
     private val networkUtils: NetworkUtil
-) : PagedList.BoundaryCallback<Character>() {
+) : PagedList.BoundaryCallback<Location>() {
     private var totalCount: Int = 0
     private var isLoaded: Boolean = false
     var status: MutableLiveData<Status> = MutableLiveData()
@@ -24,20 +24,20 @@ class CharacterListBoundaryCallback @Inject constructor(
     override fun onZeroItemsLoaded() {
         super.onZeroItemsLoaded()
         if (!isLoaded) {
-            fetchCharactersList(1)
+            fetchLocationsList(1)
         }
     }
 
-    override fun onItemAtEndLoaded(itemAtEnd: Character) {
+    override fun onItemAtEndLoaded(itemAtEnd: Location) {
         Log.e("pk", "Item end " + itemAtEnd.id + " count $totalCount isLoaded $isLoaded")
         super.onItemAtEndLoaded(itemAtEnd)
         if (!isLoaded) {
             isLoaded = true
-            fetchCharactersList(totalCount/BuildConfig.PAGE_SIZE)
+            fetchLocationsList(totalCount/BuildConfig.PAGE_SIZE)
         }
     }
 
-    private fun fetchCharactersList(pageNo: Int) {
+    private fun fetchLocationsList(pageNo: Int) {
         if (!networkUtils.isInternetAvailable()) {
             updateState(Status.NETWORK_ERROR)
             return
@@ -50,13 +50,13 @@ class CharacterListBoundaryCallback @Inject constructor(
         CoroutineScope(Dispatchers.IO + job + CoroutineExceptionHandler { _, exception ->
             error(exception)
         }).launch {
-            fetchCharacterListUseCase.invoke(pageNo).collect {
+            fetchLocationListUseCase.invoke(pageNo).collect {
                 success(it)
             }
         }
     }
 
-    private fun success(list: List<Character>?) {
+    private fun success(list: List<Location>?) {
         if (list == null) {
             isLoaded = true
             updateState(Status.LOADED)
@@ -89,7 +89,7 @@ class CharacterListBoundaryCallback @Inject constructor(
     }
 
     fun retry() {
-        fetchCharactersList(totalCount/BuildConfig.PAGE_SIZE)
+        fetchLocationsList(totalCount/BuildConfig.PAGE_SIZE)
     }
 
     fun clear() {

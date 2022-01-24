@@ -1,4 +1,4 @@
-package com.synchz.rick_morty.ui.character
+package com.synchz.rick_morty.ui.location
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,20 +8,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.synchz.rick_morty.R
-import com.synchz.rick_morty.databinding.ItemListCharacterBinding
+import com.synchz.rick_morty.databinding.ItemListLocationBinding
 import com.synchz.rick_morty.databinding.ItemLoaderBinding
-import com.synchz.rick_morty.domain.entities.Character
+import com.synchz.rick_morty.domain.entities.Location
+import com.synchz.rick_morty.ui.character.VIEW_TYPE_END
+import com.synchz.rick_morty.ui.character.VIEW_TYPE_ITEM
+import com.synchz.rick_morty.ui.character.VIEW_TYPE_LOADING
 import kotlinx.android.synthetic.main.item_end.view.*
-import kotlinx.android.synthetic.main.item_list_character.view.*
+import kotlinx.android.synthetic.main.item_list_location.view.*
 import kotlinx.android.synthetic.main.item_loader.view.*
 
-const val VIEW_TYPE_ITEM = 0
-const val VIEW_TYPE_LOADING = 1
-const val VIEW_TYPE_END = 2
-
-class CharacterListAdapter(private val listener: CharacterClickListener): PagedListAdapter<Character, RecyclerView.ViewHolder>(diffCallback){
+class LocationListAdapter(private val listener: LocationClickListener): PagedListAdapter<Location, RecyclerView.ViewHolder>(diffCallback){
 
     private var showLoader = false
     private var retryObservable = false
@@ -43,10 +41,10 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            VIEW_TYPE_ITEM -> return CharacterVH(
+            VIEW_TYPE_ITEM -> return LocationVH(
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_list_character, parent, false
+                    R.layout.item_list_location, parent, false
                 )
             )
             VIEW_TYPE_END -> return EndVH(
@@ -71,7 +69,7 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
                 retryObservable
             )
             else -> try {
-                (holder as CharacterVH).bind(getItem(position) as Character)
+                (holder as LocationVH).bind(getItem(position) as Location)
             } catch (e: Exception) {
 
             }
@@ -101,22 +99,18 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
         }
     }
 
-    inner class CharacterVH(private val binding: ItemListCharacterBinding) :
+    inner class LocationVH(private val binding: ItemListLocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(character: Character?) {
-            character?.let {
-                itemView.tvName.text = character.name
-                itemView.tvSpecies.text = character.species
-                itemView.tvGender.text = character.gender
-                itemView.tvStatus.text = character.status
-                Glide.with(itemView.context)
-                    .load(character.image)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(itemView.ivCharacter)
+        fun bind(location: Location?) {
+            location?.let {
+                itemView.tvName.text = location.name
+                itemView.tvType.text = location.type
+                itemView.tvStatus.text = location.dimension
+
                 itemView.setOnClickListener {
-                    listener.onCharacterTapped(
-                        character,
+                    listener.onLocationTapped(
+                        location,
                         adapterPosition
                     )
                 }
@@ -152,18 +146,18 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
 
 
     companion object {
-        val diffCallback: DiffUtil.ItemCallback<Character> =
-            object : DiffUtil.ItemCallback<Character>() {
+        val diffCallback: DiffUtil.ItemCallback<Location> =
+            object : DiffUtil.ItemCallback<Location>() {
                 override fun areItemsTheSame(
-                    oldItem: Character,
-                    newItem: Character
+                    oldItem: Location,
+                    newItem: Location
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: Character,
-                    newItem: Character
+                    oldItem: Location,
+                    newItem: Location
                 ): Boolean {
                     return oldItem == newItem
                 }
@@ -171,9 +165,9 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
     }
 
 
-    interface CharacterClickListener {
-        fun onCharacterTapped(
-            character: Character,
+    interface LocationClickListener {
+        fun onLocationTapped(
+            location: Location,
             adapterPosition: Int
         )
     }

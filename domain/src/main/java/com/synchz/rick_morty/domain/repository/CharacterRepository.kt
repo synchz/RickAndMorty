@@ -8,7 +8,4 @@ interface CharacterRepository {
     suspend fun fetchCharactersFromServer(pageNo: Int): Flow<List<Character>>
     suspend fun getCharactersDataSource(): DataSource.Factory<Int, Character>
     suspend fun getCharacterById(characterId: Long): Flow<Character>
-//    suspend fun saveCharacters(listCharacters: List<Character>)
-//    suspend fun getCharactersCount(): Flow<Int>
-//    suspend fun clearCharacters()
 }

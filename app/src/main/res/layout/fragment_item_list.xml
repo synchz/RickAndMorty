@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDeliveryList"
+            android:id="@+id/rvList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_list_character" />
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/swipeRefresh" />
 
     <ProgressBar
-        android:id="@+id/pbDeliveryLoader"
+        android:id="@+id/pbLoader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
