@@ -21,7 +21,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/retry"
         android:visibility="@{retryBool ? View.VISIBLE : View.GONE}"
-        android:text="Retry"
+        android:text="@string/retry"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -29,7 +29,7 @@
         android:id="@+id/errorTV"
         android:visibility="@{retryBool ? View.VISIBLE : View.GONE}"
         android:gravity="center"
-        android:text="Error Occurred"
+        android:text="@string/error_occurred"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     </LinearLayout>

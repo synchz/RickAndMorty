@@ -3,6 +3,15 @@
     <string name="tab_text_1">Character</string>
     <string name="tab_text_2">Location</string>
     <string name="tab_text_3">Episode</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_more_data">No More Data</string>
+    <string name="rick_phrase">wubba lubba dub dub</string>
+    <string name="species">Species:</string>
+    <string name="gender">Gender:</string>
+    <string name="status">Status:</string>
+    <string name="episode">Episode:</string>
+    <string name="air_date">Air Date:</string>
+    <string name="type">Type:</string>
+    <string name="dimension">Dimension:</string>
+    <string name="retry">Retry</string>
+    <string name="error_occurred">Error Occurred</string>
 </resources>

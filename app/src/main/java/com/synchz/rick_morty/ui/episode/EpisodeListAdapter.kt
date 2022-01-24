@@ -1,5 +1,6 @@
 package com.synchz.rick_morty.ui.episode
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,7 +100,7 @@ class EpisodeListAdapter(private val listener: EpisodeClickListener): PagedListA
         }
     }
 
-    inner class EpisodeVH(private val binding: ItemListEpisodeBinding) :
+    inner class EpisodeVH(binding: ItemListEpisodeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(episode: Episode?) {
@@ -118,6 +119,7 @@ class EpisodeListAdapter(private val listener: EpisodeClickListener): PagedListA
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun showLoading(showLoader: Boolean) {
         this.endObservable = false
         this.showLoader = showLoader
@@ -125,6 +127,7 @@ class EpisodeListAdapter(private val listener: EpisodeClickListener): PagedListA
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun showRetry(show: Boolean, msg: String) {
         this.retryMsg = msg
         this.endObservable = false
@@ -133,6 +136,7 @@ class EpisodeListAdapter(private val listener: EpisodeClickListener): PagedListA
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setIsLastItem(isLast: Boolean) {
         this.retryObservable = false
         this.showLoader = false

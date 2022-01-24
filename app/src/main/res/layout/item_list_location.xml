@@ -48,7 +48,7 @@
                 android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvStatusHeader"
-                android:text="Type: " />
+                android:text="@string/type" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvType"
                 android:textColor="@color/black"
@@ -74,7 +74,7 @@
                 android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvName"
-                android:text="Dimension: " />
+                android:text="@string/dimension" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvStatus"
                 android:textColor="@color/black"

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.synchz.rick_morty.BuildConfig
-import com.synchz.rick_morty.domain.entities.Character
 import com.synchz.rick_morty.domain.entities.Location
 import com.synchz.rick_morty.domain.usecases.FetchLocationsListUseCase
 import com.synchz.rick_morty.domain.usecases.GetLocationListUseCase

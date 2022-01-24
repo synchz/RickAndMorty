@@ -1,5 +1,6 @@
 package com.synchz.rick_morty.ui.character
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -101,7 +102,7 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
         }
     }
 
-    inner class CharacterVH(private val binding: ItemListCharacterBinding) :
+    inner class CharacterVH(binding: ItemListCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(character: Character?) {
@@ -124,6 +125,7 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun showLoading(showLoader: Boolean) {
         this.endObservable = false
         this.showLoader = showLoader
@@ -131,6 +133,7 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun showRetry(show: Boolean, msg: String) {
         this.retryMsg = msg
         this.endObservable = false
@@ -139,6 +142,7 @@ class CharacterListAdapter(private val listener: CharacterClickListener): PagedL
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setIsLastItem(isLast: Boolean) {
         this.retryObservable = false
         this.showLoader = false

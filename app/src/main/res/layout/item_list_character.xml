@@ -55,7 +55,7 @@
                 android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintStart_toEndOf="@+id/ivCharacter"
                 app:layout_constraintTop_toBottomOf="@+id/tvName"
-                android:text="Species: " />
+                android:text="@string/species" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvSpecies"
                 android:textColor="@color/black"
@@ -81,7 +81,7 @@
                 android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintStart_toEndOf="@+id/ivCharacter"
                 app:layout_constraintTop_toBottomOf="@+id/tvSpeciesHeader"
-                android:text="Gender: " />
+                android:text="@string/gender" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvGender"
                 android:textColor="@color/black"
@@ -107,7 +107,7 @@
                 android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintStart_toEndOf="@+id/ivCharacter"
                 app:layout_constraintTop_toBottomOf="@+id/tvGenderHeader"
-                android:text="Status: " />
+                android:text="@string/status" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvStatus"
                 android:textColor="@color/black"

@@ -1,5 +1,6 @@
 package com.synchz.rick_morty.ui.character
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +57,7 @@ class CharacterListFragment : BaseFragment<FragmentItemListBinding, CharacterLis
         rvList.adapter = characterListAdapter
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initDataSource() {
         swipeRefresh.setOnRefreshListener {
             viewModel.refreshList()
@@ -70,7 +72,7 @@ class CharacterListFragment : BaseFragment<FragmentItemListBinding, CharacterLis
     }
 
     private fun initBoundaryCallbacks() {
-        viewModel.boundaryCallback.status.observe(viewLifecycleOwner, Observer {
+        viewModel.boundaryCallback.status.observe(viewLifecycleOwner, {
             when (it) {
                 Status.LOADING -> {
                     showRefresher()
