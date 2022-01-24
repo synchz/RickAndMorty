@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.synchz.rick_morty.R
-import com.synchz.rick_morty.ui.character.CharacterListAdapter
 import com.synchz.rick_morty.ui.character.CharacterListFragment
+import com.synchz.rick_morty.ui.episode.EpisodeListFragment
 import com.synchz.rick_morty.ui.location.LocationListFragment
 
 private val TAB_TITLES = arrayOf(
@@ -22,7 +22,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
         return when(position){
             0 -> CharacterListFragment()
             1 -> LocationListFragment()
-            else -> LocationListFragment()
+            else -> EpisodeListFragment()
         }
     }
 

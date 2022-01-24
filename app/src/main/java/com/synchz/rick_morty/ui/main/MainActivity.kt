@@ -1,4 +1,4 @@
-package com.synchz.rick_morty
+package com.synchz.rick_morty.ui.main
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
