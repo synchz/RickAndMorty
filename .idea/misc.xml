@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/priks/AndroidStudioProjects/RickMorty/app/src/main/res/layout/fragment_character_list.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/priks/AndroidStudioProjects/RickMorty/app/src/main/res/layout/item_character.xml" value="0.19021739130434784" />
+        <entry key="..\:/Users/priks/AndroidStudioProjects/RickMorty/app/src/main/res/layout/item_character.xml" value="0.4" />
+        <entry key="..\:/Users/priks/AndroidStudioProjects/RickMorty/app/src/main/res/layout/item_end.xml" value="0.19021739130434784" />
+        <entry key="..\:/Users/priks/AndroidStudioProjects/RickMorty/app/src/main/res/layout/item_list_character.xml" value="0.1" />
+        <entry key="..\:/Users/priks/AndroidStudioProjects/RickMorty/app/src/main/res/layout/item_loader.xml" value="0.19021739130434784" />
       </map>
     </option>
   </component>

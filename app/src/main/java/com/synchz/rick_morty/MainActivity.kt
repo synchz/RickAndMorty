@@ -10,7 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.synchz.rick_morty.ui.main.SectionsPagerAdapter
 import com.synchz.rick_morty.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

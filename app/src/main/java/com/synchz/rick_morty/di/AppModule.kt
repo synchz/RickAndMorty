@@ -1,11 +1,13 @@
 package com.synchz.rick_morty.di
 
+import android.app.Application
 import android.content.Context
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.synchz.rick_morty.BuildConfig
 import com.synchz.rick_morty.R
+import com.synchz.rick_morty.utils.NetworkUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,4 +33,16 @@ object AppModule {
             .error(R.drawable.ic_launcher_background)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
     )
+
+    @Provides
+    @Singleton
+    internal fun provideContext(application: Application): Context {
+        return application
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideNetworkUtils(context: Context): NetworkUtil {
+        return NetworkUtil(context)
+    }
 }

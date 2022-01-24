@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 class NetworkUtil @Inject constructor(private val context: Context) {
 
-    @Suppress("DEPRECATION")
     fun isInternetAvailable(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val nw      = connectivityManager.activeNetwork ?: return false

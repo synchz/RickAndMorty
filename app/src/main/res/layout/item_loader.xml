@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="isLoadingBool" type="java.lang.Boolean" />
+        <variable name="retryBool" type="java.lang.Boolean" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+<ProgressBar
+    android:id="@+id/progress"
+    android:visibility="@{isLoadingBool ? View.VISIBLE : View.GONE}"
+    android:layout_margin="10dp"
+    android:layout_gravity="center"
+    android:indeterminate="true"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/retry"
+        android:visibility="@{retryBool ? View.VISIBLE : View.GONE}"
+        android:text="Retry"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/errorTV"
+        android:visibility="@{retryBool ? View.VISIBLE : View.GONE}"
+        android:gravity="center"
+        android:text="Error Occurred"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

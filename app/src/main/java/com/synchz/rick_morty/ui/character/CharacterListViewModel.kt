@@ -1,44 +1,52 @@
 package com.synchz.rick_morty.ui.character
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.synchz.rick_morty.BuildConfig
 import com.synchz.rick_morty.domain.entities.Character
 import com.synchz.rick_morty.domain.usecases.FetchCharacterListUseCase
 import com.synchz.rick_morty.domain.usecases.GetCharacterListUseCase
 import com.synchz.rick_morty.ui.base.BaseViewModel
+import com.synchz.rick_morty.utils.NetworkUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CharacterListViewModel @Inject constructor(
-    private val characterListUseCase: GetCharacterListUseCase,
-    private val fetchCharacterListUseCase: FetchCharacterListUseCase
+    characterListUseCase: GetCharacterListUseCase,
+    fetchCharacterListUseCase: FetchCharacterListUseCase,
+    networkUtil: NetworkUtil
 ) : BaseViewModel() {
 
-    private val _characterList = MutableLiveData<List<Character>>()
-    private var characterList: LiveData<List<Character>> = _characterList
-    private val job: Job = Job()
+    var characterListSource: LiveData<PagedList<Character>> = MutableLiveData()
+    var boundaryCallback = CharacterListBoundaryCallback(fetchCharacterListUseCase, networkUtil)
 
-    fun getCharactersList(): LiveData<List<Character>> {
-        return characterList
-    }
-
-    fun getCharacters() {
-        viewModelScope.launch(Dispatchers.IO + job + CoroutineExceptionHandler { _, exception ->
-            Log.e("PK", exception.message ?: "Error Occurred")
-        }) {
-
+    init {
+        val config = PagedList.Config.Builder()
+            .setInitialLoadSizeHint(BuildConfig.PAGE_SIZE)
+            .setPageSize(BuildConfig.PAGE_SIZE)
+            .setEnablePlaceholders(true).build()
+        viewModelScope.launch {
+            characterListSource = LivePagedListBuilder(
+                characterListUseCase.invoke(Unit), config
+            ).setBoundaryCallback(boundaryCallback).build()
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
+        boundaryCallback.clear()
+    }
+
+    fun refreshList() {
+        boundaryCallback.onRefresh()
+    }
+
+    fun retry(){
+        boundaryCallback.retry()
     }
 }
